@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <div th:fragment="import">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link type="text/css" rel="stylesheet" href="/css/custom.css"/>
+        <script type="text/javascript" src="/js/custom.js"></script>
+    </div>
+</head>
+<body>
+    <div th:fragment="nav">
+        <nav>
+            <div class="nav-wrapper blue">
+
+                <a href="/" id="logo_site" class="brand-logo left">VirtualStore</a>
+
+                <div id="nav-mobile" class="right">
+
+                    <span class="nav-btn" sec:authorize="isAuthenticated()">
+                        <a  title="Vitrine de Produtos" href="/vitrine" class="waves-effect waves-light"><i class="material-icons left">shopping_cart</i></a>
+                    </span>
+
+                    <span class="nav-btn" sec:authorize="isAuthenticated()">
+                        <a title="Carrinho de Compras" href="/carrinho" class="waves-effect waves-light"><i class="material-icons left">shopping_bag</i></a>
+                    </span>
+
+                    <span class="nav-btn" sec:authorize="isAuthenticated()">
+                        <a title="Perfil de Usuário" href="/perfilUser" class="waves-effect waves-light"><i class="material-icons left">account_circle</i></a>
+                    </span>
+
+                    <span th:if="${sameUserAcc != null} and ${sameUserAcc}" class="nav-btn">
+                        <a title="Configurções de Usuário" href="/perfilUser/configuracoes" class="waves-effect waves-light"><i class="material-icons left">manage_accounts</i></a>
+                    </span>
+
+                    <span class="nav-btn" sec:authorize="!hasRole('ADMIN') and isAuthenticated()">
+                        <a title="Criar Loja no VirtualStore" href="/criarLoja" class="waves-effect waves-light"><i class="material-icons left">add_business</i></a>
+                    </span>
+
+                    <span class="nav-btn" sec:authorize="hasRole('ADMIN') and isAuthenticated()">
+                        <a title="Relatórios e Administração Loja" href="/admin/loja" class="waves-effect waves-light"><i class="material-icons left">store</i></a>
+                    </span>
+
+                    <span class="nav-btn" th:if="${loja != null}" sec:authorize="isAuthenticated() and hasRole('ADMIN')">
+                        <a title="Adicionar um Novo Produto à Venda" href="/admin/salvarProduto" class="waves-effect waves-light"><i class="material-icons left">add_shopping_cart</i></a>
+                    </span>
+
+                    <span class="nav-btn" th:if="${loja != null}" sec:authorize="isAuthenticated() and hasRole('ADMIN')">
+                        <a title="Configurações da Loja" href="/admin/config" class="waves-effect waves-light"><i class="material-icons left">settings</i></a>
+                    </span>
+
+                    <span class="nav-btn" sec:authorize="isAuthenticated()">
+                       <a title="Deslogar" href="/logout" class="waves-effect waves-light"><i class="material-icons left">logout</i></a>
+                    </span>
+
+                    <span class="nav-btn" sec:authorize="!isAuthenticated()">
+                        <a title="Efetuar Login" href="/login" class="waves-effect waves-light"><i class="material-icons left">login</i></a>
+                    </span>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+   <footer class="page-footer blue">
+       <div class="footer" th:fragment="footer">
+           <div class="footer-copyright">
+               <div class="container">
+                   © 2020 Portfólio Mateus Lima.
+                   <a class="black-text text-lighten-4 right link-rede" target="_blank" href="https://www.linkedin.com/in/mateus-lima-a61430205/">Linkedin</a>
+                   <a class="black-text text-lighten-4 right link-rede" target="_blank" href="https://github.com/matdashell">GitHub</a>
+               </div>
+           </div>
+       </div>
+   </footer>
+</body>
+</html>

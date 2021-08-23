@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vitrine VirtualStore</title>
+    <div th:replace="base :: import"></div>
+
+</head>
+<body>
+    <header><!--standardNav-->
+        <div th:replace="base :: nav"></div>
+    </header><!--standardNav-->
+
+    <main class="container">
+
+        <div class="row">
+
+            <h4 class="left">Vitrine de Produtos:</h4>
+
+            <div class="right section">
+                <select class="browser-default" name="categoria_id" onchange="location.href=this.value">
+                    <option disabled selected>Filtrar Produtos por Categoria</option>
+                    <option value="/vitrine">Exibir Todos</option>
+                    <option th:each="categoria : ${categorias}" th:value="'/vitrine/'+${categoria.getId}+'/0'">
+                        <span th:text="${categoria.getId}"></span>
+                    </option>
+                </select><br>
+            </div>
+        </div>
+
+        <div class="row">
+            <nav class="grey lighten-2">
+                <div class="nav-wrapper">
+                    <form method="post" action="/pesquisa">
+                        <div class="input-field">
+                            <input id="search" type="search" name="pesquisa" placeholder="Pesquisar Produto" required/>
+                            <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                            <i class="material-icons">close</i>
+                        </div>
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                    </form>
+                </div>
+            </nav>
+        </div>
+
+        <div th:if="${produtos.isEmpty}">
+            <h4 class="center">Sem Produtos</h4>
+        </div>
+        <div class="row">
+            <section th:each="produto : ${produtos}">
+                <div class="col s12 m6 l4 xl4">
+                    <div class="card">
+                        <div class="card-image">
+                            <img class="center centered align-center img" alt="Image" th:src="'/image/iconProd/'+${produto.getId}"/>
+                            <span th:text="${produto.getNome}" class="card-title black-text"></span>
+                        </div>
+                        <div class="card-content">
+                            <p th:text="${produto.getDescricao}" class="descricao-produto"></p>
+                        </div>
+                        <div class="card-action">
+                            <a th:href="${'/produto/'+produto.getId}" class="waves-effect waves-light">Visualizar Produto</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <footer>
+        <div class="navfooter center">
+            <div type="hidden" th:object="${cont.setListSize(sizePage+1)}"></div>
+            <ul class="pagination">
+
+                <li th:class="${page == 0} ? disabled : waves-effect">
+                    <a th:if="${page == 0}" href="#"><i class="material-icons">chevron_left</i></a>
+                    <a th:if="${page != 0 and pesquisa == null}" th:href="${'/vitrine/' + (page-1)}"><i class="material-icons">chevron_left</i></a>
+                    <a th:if="${page != 0 and pesquisa != null}" th:href="${'/vitrine/qry/' + (page-1) + '/' + pesquisa}"><i class="material-icons">chevron_left</i></a>
+                </li>
+
+                <li th:each="contador : ${cont.getListCont}" th:class="${page == contador}? active : noActive">
+                    <a th:if="${pesquisa == null}" class="waves-effect" th:text="${(contador+1)}" th:href="${contador}"></a>
+                    <a th:if="${pesquisa != null}" class="waves-effect" th:text="${(contador+1)}" th:href="${'/vitrine/qry/' + contador + '/' + pesquisa}"></a>
+                </li>
+
+                <li th:class="${page == (sizePage - 1)} ? disabled : waves-effect">
+                    <a th:if="${page >= sizePage}" href="#"><i class="material-icons">chevron_right</i></a>
+                    <a th:if="${page < sizePage and pesquisa == null}" th:href="${'/vitrine/' + (page+1)}"><i class="material-icons">chevron_right</i></a>
+                    <a th:if="${page < sizePage and pesquisa != null}" th:href="${'/vitrine/qry/' + (page+1) + '/' + pesquisa}"><i class="material-icons">chevron_right</i></a>
+                </li>
+            </ul>
+        </div>
+        <div th:replace="base :: footer"></div>
+    </footer>
+<!--JavaScript at end of body for optimized loading-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script type="text/javascript" src="/js/custom.js"></script>
+</body>
+</html>

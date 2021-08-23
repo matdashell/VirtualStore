@@ -1,0 +1,67 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+#logo_site{
+    margin-left: 25px;
+}
+
+#home-logo{
+    background-color: #0c5da60f;
+}
+
+.home-card{
+    background-color: #f2a222;
+}
+
+.home-card i{
+    font-size: 100px;
+    align-items: center;
+}
+
+.btn{
+    margin-left: 10px;
+}
+
+.info{
+    margin: 10px 10px 0px 0px
+}
+
+.link-rede{
+    margin-left: 25px;
+}
+
+h4{
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.descricao-produto{
+    height: 50px;
+    max-height: 50px;
+}
+
+.card{
+    margin-top: 25px;
+}
+
+.card-image{
+    height: 150px;
+}
+
+.card-image-carrinho{
+    height: 100px;
+}
+
+.img {
+   object-fit: cover;
+   object-position: center;
+   width: 100%;
+   height: 100%;
+}

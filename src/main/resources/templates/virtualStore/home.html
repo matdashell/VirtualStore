@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page VirtualStore</title>
+    <div th:replace="base :: import"></div>
+
+</head>
+<body>
+    <header>
+       <div th:replace="base :: nav"></div>
+    </header>
+    <main>
+        <div class="container">
+            <div id="home-logo" class="row center">
+                <h2>Virtual Store.com</h2>
+            </div>
+            <div class="row">
+                <div  class="home-card card col s12 m4 l4 xl4 center-align">
+                    <i class="material-icons">local_shipping</i>
+                    <div class="divider"></div>
+                    <div class="text-center center">
+                            Oferecemos os mais diversos produtos
+                        em nossa loja, dado ao cliênte total
+                        liberdade para interagir com nossa
+                        plataforma!.
+                    </div>
+                </div>
+                <div  class="home-card card col s12 m4 l4 xl4 center-align">
+                    <i class="material-icons">monetization_on</i>
+                    <div class="divider"></div>
+                    <div class="text-center center">
+                            Produtos de excelente qualidade por
+                        um preço que cabe no seu bolso!. Além
+                        de saldo exclusivo dentro da loja!.
+                    </div>
+                </div>
+                <div  class="home-card card col s12 m4 l4 xl4 center-align">
+                    <i class="material-icons">shopping_bag</i>
+                    <div class="divider"></div>
+                    <div class="text-center center">
+                            Faça suas compras no conforto de sua
+                        residência aproveitando o melhor que a
+                        VirtualStore.com tem a oferecer!.
+                    </div>
+                </div>
+            </div>
+            <div sec:authorize="!isAuthenticated()" class="logar center-align">
+                <a class="btn blue waves-effect waves-light" href="/login">Cadastre-se ou Faça Login em Sua Conta</a>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div th:replace="base :: footer"></div>
+    </footer>
+<!--JavaScript at end of body for optimized loading-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>

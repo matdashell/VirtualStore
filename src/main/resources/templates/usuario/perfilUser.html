@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Perfil Usuario</title>
+    <div th:replace="base :: import"></div>
+
+</head>
+<body>
+<header><!--standardNav-->
+    <div th:replace="base :: nav"></div>
+</header><!--standardNav-->
+<main>
+    <div class="container row">
+
+        <h4>Perfil de Usuário: <span th:text="${usuario.getNomeUsuario}"></span></h4>
+
+        <div class="card-panel">
+            <table class="responsive-table centered">
+                <thead class="centered">
+                    <tr>
+                        <th><span>Número de Compras</span></th>
+                        <th><span>Crédito Disponível</span></th>
+                        <th><span>Total de Gastos em Produtos</span></th>
+                    </tr>
+                </thead>
+                <tbody class="centered">
+                    <tr>
+                        <td><span th:text="${usuario.getNumeroDeCompras}"></span></td>
+                        <td><span th:text="${usuario.getCredito}"></span></td>
+                        <td><span th:text="${usuario.getTotalGasto}"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+<footer>
+    <div th:replace="base :: footer"></div>
+</footer>
+<!--JavaScript at end of body for optimized loading-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>
